@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { Pattern } from "@/content/patterns";
+import { withBasePath } from "@/lib/basePath";
+import { downloadPatternHtml } from "@/lib/downloadPattern";
 
 type Props = {
   pattern: Pattern | null;
@@ -9,6 +11,8 @@ type Props = {
 };
 
 export function PreviewModal({ pattern, onClose }: Props) {
+  const [downloading, setDownloading] = useState(false);
+
   useEffect(() => {
     if (!pattern) return;
     const onKey = (e: KeyboardEvent) => {
@@ -23,7 +27,25 @@ export function PreviewModal({ pattern, onClose }: Props) {
     };
   }, [pattern, onClose]);
 
+  useEffect(() => {
+    setDownloading(false);
+  }, [pattern]);
+
   if (!pattern) return null;
+
+  const htmlHref = withBasePath(pattern.html);
+
+  async function onDownload() {
+    if (!pattern || downloading) return;
+    setDownloading(true);
+    try {
+      await downloadPatternHtml(pattern.slug, pattern.html);
+    } catch {
+      // keep UI simple; failure is rare on static host
+    } finally {
+      setDownloading(false);
+    }
+  }
 
   return (
     <div
@@ -42,20 +64,21 @@ export function PreviewModal({ pattern, onClose }: Props) {
             {pattern.title}
           </h2>
           <a
-            href={pattern.html}
+            href={htmlHref}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-[8px] border border-border px-3 py-1.5 text-sm text-foreground hover:bg-background"
           >
             Open in new tab
           </a>
-          <a
-            href={`/api/patterns/${pattern.slug}/download`}
-            download={`${pattern.slug}.html`}
-            className="rounded-[8px] border border-border px-3 py-1.5 text-sm text-foreground hover:bg-background"
+          <button
+            type="button"
+            onClick={onDownload}
+            disabled={downloading}
+            className="rounded-[8px] border border-border px-3 py-1.5 text-sm text-foreground hover:bg-background disabled:opacity-50"
           >
-            Download HTML
-          </a>
+            {downloading ? "Downloading…" : "Download HTML"}
+          </button>
           <button
             type="button"
             onClick={onClose}
@@ -66,7 +89,7 @@ export function PreviewModal({ pattern, onClose }: Props) {
         </div>
         <iframe
           title={pattern.title}
-          src={pattern.html}
+          src={htmlHref}
           className="min-h-0 w-full flex-1 border-0 bg-background"
         />
       </div>
