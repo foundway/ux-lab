@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Consistency and standards</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    .split { display: grid; gap: 12px; }
+    .panel { border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+    .panel h2 { margin: 0 0 10px; font-size: 0.95rem; }
+    .bad .btn { background: #fff; color: var(--accent); border: 1px dashed var(--accent); }
+    .bad .btn-ghost { background: var(--ink); color: #fff; border: 0; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Consistency and standards</h1>
+    <p class="lead">Nielsen #4 — same actions should look and mean the same thing.</p>
+    <div class="row" style="margin-bottom:12px">
+      <button class="btn" id="good" type="button">Consistent</button>
+      <button class="btn-ghost" id="bad" type="button">Inconsistent</button>
+    </div>
+    <div class="split" id="panels">
+      <div class="panel">
+        <h2>Profile</h2>
+        <div class="row">
+          <button class="btn" type="button">Save</button>
+          <button class="btn-ghost" type="button">Cancel</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Billing</h2>
+        <div class="row">
+          <button class="btn" type="button">Save</button>
+          <button class="btn-ghost" type="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const panels = document.getElementById("panels");
+    document.getElementById("good").onclick = () => {
+      panels.classList.remove("bad");
+      document.getElementById("good").className = "btn";
+      document.getElementById("bad").className = "btn-ghost";
+      panels.querySelectorAll(".panel .row")[1].innerHTML =
+        '<button class="btn" type="button">Save</button><button class="btn-ghost" type="button">Cancel</button>';
+    };
+    document.getElementById("bad").onclick = () => {
+      panels.classList.add("bad");
+      document.getElementById("bad").className = "btn";
+      document.getElementById("good").className = "btn-ghost";
+      panels.querySelectorAll(".panel .row")[1].innerHTML =
+        '<button class="btn-ghost" type="button">Discard</button><button class="btn" type="button">Commit changes</button>';
+    };
+  </script>
+</body>
+</html>

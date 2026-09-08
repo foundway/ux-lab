@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aesthetic and minimalist</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    .noise { font-size: 0.75rem; color: var(--muted); line-height: 1.4; margin: 0 0 12px; }
+    .noise[hidden] { display: none; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Aesthetic and minimalist</h1>
+    <p class="lead">Nielsen #8 — strip what competes with the primary task.</p>
+    <div class="row" style="margin-bottom:14px">
+      <button class="btn" id="focus" type="button">Focused</button>
+      <button class="btn-ghost" id="clutter" type="button">Cluttered</button>
+    </div>
+    <p class="noise" id="noise" hidden>
+      Promo: save 12% with code SUMMER · Partner newsletter · System ID ORD-9921 ·
+      Last login from Chrome on macOS · Recommended: upgrade to Pro · Cookie prefs ·
+      Survey: how likely are you to recommend us?
+    </p>
+    <div class="field">
+      <label for="card">Card number</label>
+      <input id="card" placeholder="1234 5678 9012 3456" />
+    </div>
+    <button class="btn" type="button">Pay $48</button>
+  </div>
+  <script>
+    const noise = document.getElementById("noise");
+    document.getElementById("focus").onclick = () => {
+      noise.hidden = true;
+      document.getElementById("focus").className = "btn";
+      document.getElementById("clutter").className = "btn-ghost";
+    };
+    document.getElementById("clutter").onclick = () => {
+      noise.hidden = false;
+      document.getElementById("clutter").className = "btn";
+      document.getElementById("focus").className = "btn-ghost";
+    };
+  </script>
+</body>
+</html>

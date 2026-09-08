@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Help and documentation</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    .line { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .help {
+      display: none; margin-top: 12px; border: 1px solid var(--line); border-radius: 10px;
+      padding: 12px; background: #fafaf7; font-size: 0.88rem;
+    }
+    .help.open { display: block; }
+    .help ol { margin: 8px 0 0; padding-left: 1.2rem; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Help and documentation</h1>
+    <p class="lead">Nielsen #10 — task-focused help, in context, with concrete steps.</p>
+    <div class="line">
+      <label for="web">Webhook URL</label>
+      <button class="btn-ghost" id="toggle" type="button" aria-expanded="false">Help</button>
+    </div>
+    <input id="web" placeholder="https://example.com/hooks/…" />
+    <div class="help" id="help">
+      <input id="hq" type="search" placeholder="Search help…" style="margin-bottom:8px" />
+      <div id="articles">
+        <p><strong>Add a webhook</strong></p>
+        <ol>
+          <li>Copy a URL that accepts POST JSON.</li>
+          <li>Paste it above and save.</li>
+          <li>Send a test event from Settings → Deliveries.</li>
+        </ol>
+      </div>
+      <p id="none" class="hint" hidden>No help articles match.</p>
+    </div>
+  </div>
+  <script>
+    const help = document.getElementById("help");
+    const toggle = document.getElementById("toggle");
+    const articles = document.getElementById("articles");
+    const none = document.getElementById("none");
+    toggle.onclick = () => {
+      const open = help.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    document.getElementById("hq").oninput = (e) => {
+      const q = e.target.value.toLowerCase();
+      const hit = !q || "webhook url post json test event".includes(q) || "webhook".includes(q);
+      articles.hidden = !hit;
+      none.hidden = hit;
+    };
+  </script>
+</body>
+</html>

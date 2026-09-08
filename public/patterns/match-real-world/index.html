@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Match the real world</title>
+  <link rel="stylesheet" href="../pattern.css" />
+</head>
+<body>
+  <div class="stage">
+    <h1>Match the real world</h1>
+    <p class="lead">Nielsen #2 — speak the user’s language, not internal jargon.</p>
+    <div class="row" style="margin-bottom:16px">
+      <button class="btn" type="button" id="plain">Plain language</button>
+      <button class="btn-ghost" type="button" id="jargon">Jargon</button>
+    </div>
+    <div class="field">
+      <label id="l1" for="a">Who’s staying?</label>
+      <input id="a" value="2 adults" />
+    </div>
+    <div class="field">
+      <label id="l2" for="b">Check-in date</label>
+      <input id="b" type="date" value="2026-09-12" />
+    </div>
+    <button class="btn" id="cta" type="button">Find a room</button>
+  </div>
+  <script>
+    const copy = {
+      plain: { l1: "Who’s staying?", l2: "Check-in date", cta: "Find a room", a: "2 adults" },
+      jargon: { l1: "PAX_COUNT", l2: "ARRIVAL_TS", cta: "Invoke inventory query", a: "pax=2" },
+    };
+    function apply(mode) {
+      const c = copy[mode];
+      document.getElementById("l1").textContent = c.l1;
+      document.getElementById("l2").textContent = c.l2;
+      document.getElementById("cta").textContent = c.cta;
+      document.getElementById("a").value = c.a;
+      document.getElementById("plain").className = mode === "plain" ? "btn" : "btn-ghost";
+      document.getElementById("jargon").className = mode === "jargon" ? "btn" : "btn-ghost";
+    }
+    document.getElementById("plain").onclick = () => apply("plain");
+    document.getElementById("jargon").onclick = () => apply("jargon");
+  </script>
+</body>
+</html>

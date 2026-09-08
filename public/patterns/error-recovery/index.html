@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Error recovery</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    .banner {
+      border: 1px solid #f2c2c0; background: #fff5f5; color: var(--danger);
+      border-radius: 10px; padding: 12px 14px; font-size: 0.9rem; margin-bottom: 16px;
+    }
+    .banner strong { display: block; margin-bottom: 4px; color: var(--ink); }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Error recovery</h1>
+    <p class="lead">Nielsen #9 — plain language, precise problem, a way forward.</p>
+    <div class="banner" id="banner" role="alert">
+      <strong>Payment didn’t go through</strong>
+      Your card was declined (insufficient funds). Try another card, or pay with bank transfer.
+    </div>
+    <div class="row">
+      <button class="btn" id="retry" type="button">Try another card</button>
+      <button class="btn-ghost" id="bank" type="button">Use bank transfer</button>
+    </div>
+    <p class="hint" id="out" hidden></p>
+  </div>
+  <script>
+    const banner = document.getElementById("banner");
+    const out = document.getElementById("out");
+    document.getElementById("retry").onclick = () => {
+      banner.hidden = true;
+      out.hidden = false;
+      out.textContent = "Card form ready — recovery path without an error code.";
+    };
+    document.getElementById("bank").onclick = () => {
+      banner.hidden = true;
+      out.hidden = false;
+      out.textContent = "Switched to bank transfer — constructive next step.";
+    };
+  </script>
+</body>
+</html>

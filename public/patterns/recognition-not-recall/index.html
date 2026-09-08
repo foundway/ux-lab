@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recognition rather than recall</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 16px; }
+    .chip {
+      border: 1px solid var(--line); background: #fff; border-radius: 999px;
+      padding: 5px 10px; font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Recognition rather than recall</h1>
+    <p class="lead">Nielsen #6 — show options; don’t make users remember them.</p>
+    <div class="field">
+      <label for="q">Search projects</label>
+      <input id="q" type="search" placeholder="Type or pick a recent search" />
+    </div>
+    <p class="hint">Recent</p>
+    <div class="chips" id="chips"></div>
+    <p id="result" class="hint">Pick a chip — recognition beats blank recall.</p>
+  </div>
+  <script>
+    const recent = ["Q3 roadmap", "Design crit notes", "Hiring pipeline", "Brand tokens"];
+    const chips = document.getElementById("chips");
+    const q = document.getElementById("q");
+    const result = document.getElementById("result");
+    recent.forEach((label) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip";
+      b.textContent = label;
+      b.onclick = () => {
+        q.value = label;
+        result.textContent = "Opened results for “" + label + "”.";
+      };
+      chips.appendChild(b);
+    });
+  </script>
+</body>
+</html>
