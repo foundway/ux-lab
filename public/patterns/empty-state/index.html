@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Empty state</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    .art { display: grid; place-items: center; margin: 8px 0 16px; }
+    #list { display: none; margin: 0; padding: 0; list-style: none; }
+    #list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.92rem;
+    }
+    #empty { text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div id="empty">
+      <div class="art" aria-hidden="true">
+        <svg width="88" height="64" viewBox="0 0 88 64" fill="none">
+          <rect x="8" y="12" width="72" height="44" rx="8" stroke="#cfcabf" stroke-width="2"/>
+          <path d="M22 36h44M22 28h28" stroke="#cfcabf" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="64" cy="20" r="10" fill="#f6f5f2" stroke="#1d4ed8" stroke-width="2"/>
+          <path d="M64 16v8M60 20h8" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h1>No projects yet</h1>
+      <p class="lead">Projects you create will live here. Start with a name — you can invite people later.</p>
+      <button class="btn" id="create">New project</button>
+    </div>
+    <div id="filled" hidden>
+      <h1>Projects</h1>
+      <ul id="list"></ul>
+    </div>
+  </div>
+  <script>
+    const empty = document.getElementById("empty");
+    const filled = document.getElementById("filled");
+    const list = document.getElementById("list");
+    document.getElementById("create").onclick = () => {
+      empty.hidden = true;
+      filled.hidden = false;
+      list.style.display = "block";
+      list.innerHTML = "<li>Northwind relaunch</li>";
+    };
+  </script>
+</body>
+</html>

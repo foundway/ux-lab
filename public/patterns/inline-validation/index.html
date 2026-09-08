@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inline form validation</title>
+  <link rel="stylesheet" href="../pattern.css" />
+</head>
+<body>
+  <div class="stage">
+    <h1>Create account</h1>
+    <p class="lead">Errors appear after a field is touched, not on first paint.</p>
+    <form id="form" novalidate>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" />
+        <div class="error" id="email-err" hidden></div>
+      </div>
+      <div class="field">
+        <label for="pw">Password</label>
+        <input id="pw" name="password" type="password" autocomplete="new-password" />
+        <div class="error" id="pw-err" hidden></div>
+        <div class="hint">At least 8 characters.</div>
+      </div>
+      <button class="btn" type="submit">Continue</button>
+      <p class="hint" id="done" hidden>Looks good — form would submit here.</p>
+    </form>
+  </div>
+  <script>
+    const email = document.getElementById("email");
+    const pw = document.getElementById("pw");
+    const emailErr = document.getElementById("email-err");
+    const pwErr = document.getElementById("pw-err");
+    const done = document.getElementById("done");
+    const touched = { email: false, pw: false };
+
+    function emailMsg() {
+      if (!email.value.trim()) return "Enter an email.";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) return "Use a valid email, like name@site.com.";
+      return "";
+    }
+    function pwMsg() {
+      if (pw.value.length < 8) return "Use at least 8 characters.";
+      return "";
+    }
+
+    function show(el, err, msg) {
+      if (msg) { err.hidden = false; err.textContent = msg; el.setAttribute("aria-invalid", "true"); }
+      else { err.hidden = true; err.textContent = ""; el.removeAttribute("aria-invalid"); }
+    }
+
+    email.addEventListener("blur", () => { touched.email = true; show(email, emailErr, emailMsg()); });
+    pw.addEventListener("blur", () => { touched.pw = true; show(pw, pwErr, pwMsg()); });
+    email.addEventListener("input", () => { if (touched.email) show(email, emailErr, emailMsg()); });
+    pw.addEventListener("input", () => { if (touched.pw) show(pw, pwErr, pwMsg()); });
+
+    document.getElementById("form").onsubmit = (e) => {
+      e.preventDefault();
+      touched.email = touched.pw = true;
+      const eMsg = emailMsg();
+      const pMsg = pwMsg();
+      show(email, emailErr, eMsg);
+      show(pw, pwErr, pMsg);
+      done.hidden = !!(eMsg || pMsg);
+    };
+  </script>
+</body>
+</html>

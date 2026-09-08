@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confirm dialog</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    #overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgb(0 0 0 / 0.35);
+      place-items: center;
+    }
+    #overlay.open { display: grid; }
+    .dialog {
+      width: min(360px, calc(100% - 32px));
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--line);
+    }
+    .dialog h2 { margin: 0 0 8px; font-size: 1.05rem; }
+    .dialog p { margin: 0 0 18px; color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
+    .actions { display: flex; justify-content: flex-end; gap: 8px; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Workspace</h1>
+    <p class="lead" id="status">“Q3 archive” is still in this workspace.</p>
+    <button class="btn-danger" id="delete">Delete project</button>
+  </div>
+  <div id="overlay" role="dialog" aria-modal="true" aria-labelledby="dtitle">
+    <div class="dialog">
+      <h2 id="dtitle">Delete this project?</h2>
+      <p>This removes Q3 archive and its files. This can’t be undone.</p>
+      <div class="actions">
+        <button class="btn-ghost" id="cancel">Cancel</button>
+        <button class="btn-danger" id="confirm">Delete</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const overlay = document.getElementById("overlay");
+    const status = document.getElementById("status");
+    const open = () => overlay.classList.add("open");
+    const close = () => overlay.classList.remove("open");
+
+    document.getElementById("delete").onclick = open;
+    document.getElementById("cancel").onclick = close;
+    overlay.onclick = (e) => { if (e.target === overlay) close(); };
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+    document.getElementById("confirm").onclick = () => {
+      status.textContent = "Q3 archive was deleted.";
+      document.getElementById("delete").disabled = true;
+      close();
+    };
+  </script>
+</body>
+</html>

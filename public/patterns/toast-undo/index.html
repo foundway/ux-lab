@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Toast with undo</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    #toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%) translateY(16px);
+      display: none;
+      align-items: center;
+      gap: 16px;
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 12px 10px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+    #toast.show {
+      display: flex;
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    #toast button {
+      background: transparent;
+      color: #fff;
+      border: 0;
+      font-weight: 600;
+      padding: 6px 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Archive item</h1>
+    <p class="lead">Confirming an action with a toast that can still be undone.</p>
+    <p id="status" class="hint">3 notes in inbox</p>
+    <button class="btn" id="archive">Archive “Kickoff notes”</button>
+  </div>
+  <div id="toast" role="status">
+    <span>Archived Kickoff notes</span>
+    <button type="button" id="undo">Undo</button>
+  </div>
+  <script>
+    const status = document.getElementById("status");
+    const toast = document.getElementById("toast");
+    let timer;
+    let archived = false;
+
+    function showToast() {
+      toast.classList.add("show");
+      clearTimeout(timer);
+      timer = setTimeout(() => toast.classList.remove("show"), 4000);
+    }
+
+    document.getElementById("archive").onclick = () => {
+      archived = true;
+      status.textContent = "2 notes in inbox";
+      showToast();
+    };
+
+    document.getElementById("undo").onclick = () => {
+      archived = false;
+      status.textContent = "3 notes in inbox";
+      toast.classList.remove("show");
+      clearTimeout(timer);
+    };
+  </script>
+</body>
+</html>

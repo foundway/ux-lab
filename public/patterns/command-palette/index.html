@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Command palette</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    #overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgb(0 0 0 / 0.35);
+      place-items: start center;
+      padding-top: 12vh;
+    }
+    #overlay.open { display: grid; }
+    .palette {
+      width: min(420px, calc(100% - 32px));
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .palette input {
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      padding: 12px 14px;
+    }
+    .item {
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .item[aria-selected="true"], .item:hover { background: #f3f2ee; }
+    kbd {
+      font: 0.75rem ui-monospace, monospace;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Jump anywhere</h1>
+    <p class="lead">Press <kbd>⌘</kbd><kbd>K</kbd> or click the button. Filter, then Enter.</p>
+    <button class="btn" id="open">Open command palette</button>
+    <p class="hint" id="chosen">No action yet</p>
+  </div>
+  <div id="overlay" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="palette">
+      <input id="q" type="search" placeholder="Type a command…" autocomplete="off" />
+      <div id="list"></div>
+    </div>
+  </div>
+  <script>
+    const actions = ["New file", "Go to inbox", "Toggle sidebar", "Archive selection", "Open settings"];
+    const overlay = document.getElementById("overlay");
+    const q = document.getElementById("q");
+    const list = document.getElementById("list");
+    const chosen = document.getElementById("chosen");
+    let filtered = actions;
+    let index = 0;
+
+    function render() {
+      list.innerHTML = filtered.map((name, i) =>
+        `<div class="item" role="option" aria-selected="${i === index}">${name}</div>`
+      ).join("") || `<div class="item">No matches</div>`;
+    }
+
+    function openPal() {
+      overlay.classList.add("open");
+      q.value = "";
+      filtered = actions;
+      index = 0;
+      render();
+      q.focus();
+    }
+
+    function closePal() { overlay.classList.remove("open"); }
+
+    function run() {
+      if (!filtered[index]) return;
+      chosen.textContent = "Ran: " + filtered[index];
+      closePal();
+    }
+
+    document.getElementById("open").onclick = openPal;
+    overlay.onclick = (e) => { if (e.target === overlay) closePal(); };
+
+    q.oninput = () => {
+      const t = q.value.toLowerCase();
+      filtered = actions.filter((a) => a.toLowerCase().includes(t));
+      index = 0;
+      render();
+    };
+
+    document.addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        overlay.classList.contains("open") ? closePal() : openPal();
+      }
+      if (!overlay.classList.contains("open")) return;
+      if (e.key === "Escape") closePal();
+      if (e.key === "ArrowDown") { index = Math.min(index + 1, filtered.length - 1); render(); e.preventDefault(); }
+      if (e.key === "ArrowUp") { index = Math.max(index - 1, 0); render(); e.preventDefault(); }
+      if (e.key === "Enter") run();
+    });
+
+    list.onclick = (e) => {
+      const item = e.target.closest(".item");
+      if (!item) return;
+      index = [...list.children].indexOf(item);
+      run();
+    };
+
+    render();
+  </script>
+</body>
+</html>
