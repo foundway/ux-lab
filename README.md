@@ -10,6 +10,14 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## GitHub Pages
+
+Pushes to `main` build a static export and deploy via [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
+
+Live site (after Pages is enabled): [https://foundway.github.io/ux-lab/](https://foundway.github.io/ux-lab/)
+
+In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
 ## Layout
 
 | Path | Role |
@@ -19,7 +27,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | [`public/patterns/{slug}/thumb.svg`](public/patterns/) | Static gallery thumbnail. |
 | [`public/patterns/pattern.css`](public/patterns/pattern.css) | Shared tokens and base controls. |
 
-Download builds one HTML file with `pattern.css` inlined.
+Download builds one HTML file with `pattern.css` inlined (in the browser).
 
 ## Add a snippet
 
@@ -44,5 +52,5 @@ Reuse `pattern.css` (`.stage`, `.btn`, `.btn-ghost`, `.btn-danger`). Do not turn
 | Command | |
 | --- | --- |
 | `npm run dev` | Local gallery |
-| `npm run build` | Production build |
+| `npm run build` | Static production export (`out/`) |
 | `npm run lint` | ESLint |

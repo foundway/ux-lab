@@ -1,6 +1,7 @@
 "use client";
 
 import type { Pattern } from "@/content/patterns";
+import { withBasePath } from "@/lib/basePath";
 
 type Props = {
   pattern: Pattern;
@@ -9,6 +10,8 @@ type Props = {
 };
 
 export function PatternCard({ pattern, onOpen, layout = "card" }: Props) {
+  const thumb = withBasePath(pattern.thumb);
+
   if (layout === "row") {
     return (
       <button
@@ -17,7 +20,7 @@ export function PatternCard({ pattern, onOpen, layout = "card" }: Props) {
         className="flex w-full items-center gap-4 bg-surface px-3 py-3 text-left transition-colors hover:bg-background"
       >
         <img
-          src={pattern.thumb}
+          src={thumb}
           alt=""
           className="h-14 w-[88px] shrink-0 rounded-[8px] bg-background object-cover"
         />
@@ -46,7 +49,7 @@ export function PatternCard({ pattern, onOpen, layout = "card" }: Props) {
       className="group flex flex-col overflow-hidden rounded-card border border-border bg-surface text-left shadow-card transition-colors hover:border-foreground/20"
     >
       <img
-        src={pattern.thumb}
+        src={thumb}
         alt=""
         className="aspect-[8/5] w-full bg-background object-cover"
       />
