@@ -36,6 +36,7 @@ The user wants a new entry derived from UX theory or a named pattern, without sp
    - Empty state — no-data first run
    - Skeleton loading — waiting / layout stability
    - Confirm dialog — destructive confirm, cancel as default
+   - Nielsen #1–#10 demos (`visibility-system-status` … `help-documentation`) — see `CANON.md`
 3. Good gaps (examples, not a closed list): progressive disclosure, tabs, accordion, tooltip, breadcrumbs, pagination, stepper, drag-and-drop, skip link / focus order, optimistic list update, multi-select, date or time entry, split button, toast *without* undo (if distinct), etc. Tie the demo to a named principle or heuristic in the description (Norman, Nielsen, Fitts, Hick, Gestalt, WCAG) when that is the prompt.
 4. Do not add a second example of the same interaction with a new name.
 

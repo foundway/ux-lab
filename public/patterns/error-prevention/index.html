@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Error prevention</title>
+  <link rel="stylesheet" href="../pattern.css" />
+</head>
+<body>
+  <div class="stage">
+    <h1>Error prevention</h1>
+    <p class="lead">Nielsen #5 — stop slips before they become problems.</p>
+    <div class="field">
+      <label for="start">Start date</label>
+      <input id="start" type="date" value="2026-09-10" />
+    </div>
+    <div class="field">
+      <label for="end">End date</label>
+      <input id="end" type="date" value="2026-09-08" />
+      <div class="error" id="err" hidden>End can’t be before start — pick a later day.</div>
+    </div>
+    <button class="btn" id="book" type="button" disabled>Book stay</button>
+    <p class="hint" id="ok" hidden>Dates look valid — ready to book.</p>
+  </div>
+  <script>
+    const start = document.getElementById("start");
+    const end = document.getElementById("end");
+    const err = document.getElementById("err");
+    const book = document.getElementById("book");
+    const ok = document.getElementById("ok");
+    function check() {
+      const bad = end.value && start.value && end.value < start.value;
+      err.hidden = !bad;
+      book.disabled = !start.value || !end.value || bad;
+      ok.hidden = book.disabled;
+      if (!book.disabled) ok.textContent = "Dates look valid — ready to book.";
+    }
+    start.oninput = end.oninput = check;
+    book.onclick = () => { ok.hidden = false; ok.textContent = "Booked (demo) — error was prevented earlier."; };
+    check();
+  </script>
+</body>
+</html>

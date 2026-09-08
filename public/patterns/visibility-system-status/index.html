@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Visibility of system status</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    .bar { height: 8px; background: #eceae4; border-radius: 999px; overflow: hidden; margin: 16px 0 8px; }
+    .fill { height: 100%; width: 0; background: var(--accent); transition: width 80ms linear; }
+    #status { font-size: 0.85rem; color: var(--muted); min-height: 1.2em; }
+    #status.ok { color: var(--ok); }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Visibility of system status</h1>
+    <p class="lead">Nielsen #1 — keep users informed about what is going on, in time.</p>
+    <button class="btn" id="upload">Upload report.pdf</button>
+    <div class="bar" aria-hidden="true"><div class="fill" id="fill"></div></div>
+    <p id="status" role="status">Ready</p>
+  </div>
+  <script>
+    const fill = document.getElementById("fill");
+    const status = document.getElementById("status");
+    const btn = document.getElementById("upload");
+    btn.onclick = () => {
+      btn.disabled = true;
+      let n = 0;
+      status.className = "";
+      status.textContent = "Uploading… 0%";
+      const t = setInterval(() => {
+        n += 4;
+        fill.style.width = n + "%";
+        status.textContent = "Uploading… " + n + "%";
+        if (n >= 100) {
+          clearInterval(t);
+          status.className = "ok";
+          status.textContent = "Uploaded — report.pdf is ready.";
+          btn.disabled = false;
+          setTimeout(() => { fill.style.width = "0"; }, 800);
+        }
+      }, 40);
+    };
+  </script>
+</body>
+</html>

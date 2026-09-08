@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User control and freedom</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    .steps { display: flex; gap: 8px; margin-bottom: 16px; font-size: 0.8rem; color: var(--muted); }
+    .steps span.on { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>User control and freedom</h1>
+    <p class="lead">Nielsen #3 — a clear emergency exit from an unwanted flow.</p>
+    <div class="steps" id="steps"><span class="on">1 Details</span><span>2 Shipping</span><span>3 Pay</span></div>
+    <p id="body" class="hint">Enter your name to continue the checkout wizard.</p>
+    <div class="field" id="field">
+      <label for="name">Name</label>
+      <input id="name" placeholder="Alex Rivera" />
+    </div>
+    <div class="row">
+      <button class="btn-ghost" id="cancel" type="button">Cancel checkout</button>
+      <button class="btn-ghost" id="back" type="button" hidden>Back</button>
+      <button class="btn" id="next" type="button">Continue</button>
+    </div>
+    <p id="done" class="hint" hidden></p>
+  </div>
+  <script>
+    let step = 0;
+    const labels = ["1 Details", "2 Shipping", "3 Pay"];
+    const texts = [
+      "Enter your name to continue the checkout wizard.",
+      "Where should we send the package?",
+      "Ready to pay — or leave without finishing.",
+    ];
+    const field = document.getElementById("field");
+    const body = document.getElementById("body");
+    const back = document.getElementById("back");
+    const next = document.getElementById("next");
+    const done = document.getElementById("done");
+    function paint() {
+      [...document.getElementById("steps").children].forEach((el, i) => {
+        el.className = i === step ? "on" : "";
+        el.textContent = labels[i];
+      });
+      body.hidden = false;
+      body.textContent = texts[step];
+      field.hidden = step !== 0;
+      back.hidden = step === 0;
+      next.hidden = false;
+      next.textContent = step === 2 ? "Place order" : "Continue";
+      done.hidden = true;
+    }
+    document.getElementById("cancel").onclick = () => {
+      step = 0;
+      paint();
+      body.hidden = true;
+      field.hidden = true;
+      next.hidden = true;
+      back.hidden = true;
+      done.hidden = false;
+      done.textContent = "Left checkout — no charge. Emergency exit worked.";
+    };
+    back.onclick = () => { step = Math.max(0, step - 1); paint(); };
+    next.onclick = () => {
+      if (step < 2) { step++; paint(); }
+      else {
+        done.hidden = false;
+        done.textContent = "Order placed (demo).";
+        next.hidden = true;
+      }
+    };
+    paint();
+  </script>
+</body>
+</html>
