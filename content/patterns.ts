@@ -184,10 +184,24 @@ export const patterns: Pattern[] = [
     updatedAt: "2026-09-09",
     html: "/patterns/natural-mapping/index.html",
     thumb: "/patterns/natural-mapping/thumb.svg",
-    isNew: true,
     canon: {
       label: "Mapping",
       anchor: "mapping",
+    },
+  },
+  {
+    slug: "affordances-signifiers",
+    title: "Affordances and signifiers",
+    description: "A pull handle versus a push plate so the hardware itself communicates the action.",
+    tags: ["norman", "affordance"],
+    category: "Principles",
+    updatedAt: "2026-09-09",
+    html: "/patterns/affordances-signifiers/index.html",
+    thumb: "/patterns/affordances-signifiers/thumb.svg",
+    isNew: true,
+    canon: {
+      label: "Affordances and signifiers",
+      anchor: "affordances-and-signifiers",
     },
   },
 ];

@@ -12,9 +12,6 @@ Drawn mainly from Don Norman’s model of how people understand and operate ever
 **Feedback.** Every action should produce a noticeable response in time with the action.  
 — Norman, *The Design of Everyday Things* (2013).
 
-**Affordances and signifiers.** Affordances are possible actions; signifiers communicate them.  
-— Norman, *The Design of Everyday Things* (2013). See also Gibson, J. J. (1979). *The Ecological Approach to Visual Perception*.
-
 **Constraints.** Limit what can be done so errors are harder.  
 — Norman, *The Design of Everyday Things* (2013).
 
@@ -32,6 +29,17 @@ Controls should correspond spatially or conceptually to their effects. Natural m
 — Don Norman, *The Design of Everyday Things* (rev. ed. 2013). [MIT Press](https://mitpress.mit.edu/9780262525671/the-design-of-everyday-things/).
 
 Lab demo: [Natural mapping](/patterns/natural-mapping/index.html).
+
+<a id="affordances-and-signifiers"></a>
+### Affordances and signifiers
+
+Affordances are the actions an object makes possible. Signifiers are perceivable cues that communicate those actions, so people can see what to do instead of guessing.
+
+A classic case: a handle affords grasping and pulling; a flat plate affords pushing. When the hardware matches the motion, no label is needed.
+
+— Don Norman, *The Design of Everyday Things* (rev. ed. 2013). [MIT Press](https://mitpress.mit.edu/9780262525671/the-design-of-everyday-things/). The term *affordance* is from Gibson, J. J. (1979). *The Ecological Approach to Visual Perception*. Houghton Mifflin; Classic Edition, [Psychology Press / Routledge](https://www.routledge.com/The-Ecological-Approach-to-Visual-Perception-Classic-Edition/Gibson/p/book/9781848725782).
+
+Lab demo: [Affordances and signifiers](/patterns/affordances-signifiers/index.html).
 
 ## Nielsen’s 10 usability heuristics
 
@@ -83,9 +91,11 @@ Jakob Nielsen’s inspection heuristics. Full definitions: [NN/g](https://www.nn
 | Pattern | Exploring |
 | --- | --- |
 | [Natural mapping](/patterns/natural-mapping/index.html) | [#Mapping](#mapping) |
+| [Affordances and signifiers](/patterns/affordances-signifiers/index.html) | [#Affordances and signifiers](#affordances-and-signifiers) |
 
 ## References
 
+- Gibson, J. J. (1979). [*The Ecological Approach to Visual Perception*](https://www.routledge.com/The-Ecological-Approach-to-Visual-Perception-Classic-Edition/Gibson/p/book/9781848725782). Houghton Mifflin; Classic Edition, Psychology Press.
 - Nielsen, J. (1994). [10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/). Nielsen Norman Group.
 - Norman, D. A. (2013). [*The Design of Everyday Things* (revised)](https://mitpress.mit.edu/9780262525671/the-design-of-everyday-things/). MIT Press.
 - Rams, D. Ten Principles for Good Design. [Vitsœ](https://www.vitsoe.com/gb/about/good-design).
