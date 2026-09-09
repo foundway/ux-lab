@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Pattern } from "@/content/patterns";
 import { CanonModal } from "./CanonModal";
 import { FilterChips } from "./FilterChips";
@@ -21,9 +21,17 @@ export function Gallery({ patterns, canonMarkdown }: Props) {
   const [sort, setSort] = useState<SortKey>("az");
   const [open, setOpen] = useState<Pattern | null>(null);
   const [canonOpen, setCanonOpen] = useState(false);
+  const [canonAnchor, setCanonAnchor] = useState<string | null>(null);
   const [view, setView] = useState<ViewMode>("gallery");
   const close = useCallback(() => setOpen(null), []);
   const closeCanon = useCallback(() => setCanonOpen(false), []);
+
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get("canon");
+    if (!id) return;
+    setCanonAnchor(id);
+    setCanonOpen(true);
+  }, []);
 
   const tags = useMemo(() => {
     return [...new Set(patterns.flatMap((p) => p.tags))].sort((a, b) =>
@@ -80,7 +88,12 @@ export function Gallery({ patterns, canonMarkdown }: Props) {
 
       <PatternGrid patterns={visible} onOpen={setOpen} view={view} />
       <PreviewModal pattern={open} onClose={close} />
-      <CanonModal markdown={canonMarkdown} open={canonOpen} onClose={closeCanon} />
+      <CanonModal
+        markdown={canonMarkdown}
+        open={canonOpen}
+        onClose={closeCanon}
+        scrollTo={canonAnchor}
+      />
     </div>
   );
 }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Natural mapping</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    .cooktop,
+    .knobs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 0 auto;
+    }
+    .cooktop {
+      width: 176px;
+      margin-bottom: 20px;
+    }
+    .knobs {
+      width: 128px;
+      margin-bottom: 4px;
+    }
+    .burner {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 3px solid var(--line);
+      background: var(--bg);
+    }
+    .burner.on {
+      border-color: var(--ink);
+      background: var(--ink);
+    }
+    .knob {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 2px solid var(--ink);
+      background: #fff;
+      padding: 0;
+    }
+    .knob:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .knob[aria-pressed="true"] {
+      background: var(--ink);
+    }
+    .footnote {
+      width: min(440px, 100%);
+      margin-top: 18px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .footnote a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Natural mapping</h1>
+    <p class="lead">Knobs sit in the same layout as the burners they control — no labels to memorize.</p>
+    <div class="cooktop" aria-hidden="true">
+      <div class="burner" data-i="0"></div>
+      <div class="burner" data-i="1"></div>
+      <div class="burner" data-i="2"></div>
+      <div class="burner" data-i="3"></div>
+    </div>
+    <div class="knobs">
+      <button type="button" class="knob" data-i="0" aria-pressed="false" aria-label="Back left burner"></button>
+      <button type="button" class="knob" data-i="1" aria-pressed="false" aria-label="Back right burner"></button>
+      <button type="button" class="knob" data-i="2" aria-pressed="false" aria-label="Front left burner"></button>
+      <button type="button" class="knob" data-i="3" aria-pressed="false" aria-label="Front right burner"></button>
+    </div>
+    <p class="hint" id="status" role="status">All burners off — press a knob.</p>
+  </div>
+  <footer class="footnote">
+    Created 2026-09-09 · Canon:
+    <a href="../../?canon=mapping" target="_top">Mapping</a>
+  </footer>
+  <script>
+    const names = ["Back left", "Back right", "Front left", "Front right"];
+    const burners = document.querySelectorAll(".burner");
+    const knobs = document.querySelectorAll(".knob");
+    const status = document.getElementById("status");
+    let on = -1;
+
+    knobs.forEach((knob) => {
+      knob.onclick = () => {
+        const i = Number(knob.dataset.i);
+        on = on === i ? -1 : i;
+        burners.forEach((b, idx) => b.classList.toggle("on", idx === on));
+        knobs.forEach((k, idx) => k.setAttribute("aria-pressed", idx === on ? "true" : "false"));
+        status.textContent = on < 0 ? "All burners off — press a knob." : names[on] + " is on.";
+      };
+    });
+  </script>
+</body>
+</html>

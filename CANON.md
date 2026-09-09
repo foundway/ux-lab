@@ -15,9 +15,6 @@ Drawn mainly from Don Norman’s model of how people understand and operate ever
 **Affordances and signifiers.** Affordances are possible actions; signifiers communicate them.  
 — Norman, *The Design of Everyday Things* (2013). See also Gibson, J. J. (1979). *The Ecological Approach to Visual Perception*.
 
-**Mapping.** Controls should correspond spatially or conceptually to their effects.  
-— Norman, *The Design of Everyday Things* (2013).
-
 **Constraints.** Limit what can be done so errors are harder.  
 — Norman, *The Design of Everyday Things* (2013).
 
@@ -26,6 +23,15 @@ Drawn mainly from Don Norman’s model of how people understand and operate ever
 
 **Good design is as little design as possible.**  
 — Dieter Rams, “Ten Principles for Good Design” (c. 1970s). [Vitsœ](https://www.vitsoe.com/gb/about/good-design).
+
+<a id="mapping"></a>
+### Mapping
+
+Controls should correspond spatially or conceptually to their effects. Natural mapping places controls in the same layout as what they operate, so the relationship can be seen instead of memorized.
+
+— Don Norman, *The Design of Everyday Things* (rev. ed. 2013). [MIT Press](https://mitpress.mit.edu/9780262525671/the-design-of-everyday-things/).
+
+Lab demo: [Natural mapping](/patterns/natural-mapping/index.html).
 
 ## Nielsen’s 10 usability heuristics
 
@@ -72,8 +78,14 @@ Jakob Nielsen’s inspection heuristics. Full definitions: [NN/g](https://www.nn
 | [Error recovery](/patterns/error-recovery/index.html) | #9 |
 | [Help and documentation](/patterns/help-documentation/index.html) | #10 |
 
+### Norman (dedicated demos)
+
+| Pattern | Exploring |
+| --- | --- |
+| [Natural mapping](/patterns/natural-mapping/index.html) | [#Mapping](#mapping) |
+
 ## References
 
 - Nielsen, J. (1994). [10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/). Nielsen Norman Group.
-- Norman, D. A. (2013). *The Design of Everyday Things* (revised). MIT Press.
+- Norman, D. A. (2013). [*The Design of Everyday Things* (revised)](https://mitpress.mit.edu/9780262525671/the-design-of-everyday-things/). MIT Press.
 - Rams, D. Ten Principles for Good Design. [Vitsœ](https://www.vitsoe.com/gb/about/good-design).
