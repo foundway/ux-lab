@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { withBasePath } from "@/lib/basePath";
@@ -9,9 +9,27 @@ type Props = {
   markdown: string;
   open: boolean;
   onClose: () => void;
+  scrollTo?: string | null;
 };
 
-export function CanonModal({ markdown, open, onClose }: Props) {
+function nodeText(node: ReactNode): string {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(nodeText).join("");
+  if (typeof node === "object" && "props" in node) {
+    return nodeText((node as { props?: { children?: ReactNode } }).props?.children);
+  }
+  return "";
+}
+
+function headingId(children: ReactNode): string {
+  const text = nodeText(children).trim();
+  const numbered = /^(\d+)\.\s/.exec(text);
+  if (numbered) return `nielsen-${numbered[1]}`;
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+export function CanonModal({ markdown, open, onClose, scrollTo }: Props) {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -25,6 +43,14 @@ export function CanonModal({ markdown, open, onClose }: Props) {
       document.body.style.overflow = prev;
     };
   }, [open, onClose]);
+
+  useEffect(() => {
+    if (!open || !scrollTo) return;
+    const timer = window.setTimeout(() => {
+      document.getElementById(scrollTo)?.scrollIntoView({ block: "start" });
+    }, 50);
+    return () => window.clearTimeout(timer);
+  }, [open, scrollTo, markdown]);
 
   if (!open) return null;
 
@@ -56,6 +82,8 @@ export function CanonModal({ markdown, open, onClose }: Props) {
           <Markdown
             remarkPlugins={[remarkGfm]}
             components={{
+              h2: ({ children }) => <h2 id={headingId(children)}>{children}</h2>,
+              h3: ({ children }) => <h3 id={headingId(children)}>{children}</h3>,
               a: ({ href, children }) => {
                 const isExternal = href?.startsWith("http");
                 const resolved =

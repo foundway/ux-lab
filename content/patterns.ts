@@ -7,6 +7,11 @@ export type Pattern = {
   updatedAt: string;
   html: string;
   thumb: string;
+  isNew?: boolean;
+  canon?: {
+    label: string;
+    anchor: string;
+  };
 };
 
 export const patterns: Pattern[] = [
@@ -169,5 +174,20 @@ export const patterns: Pattern[] = [
     updatedAt: "2026-09-08",
     html: "/patterns/help-documentation/index.html",
     thumb: "/patterns/help-documentation/thumb.svg",
+  },
+  {
+    slug: "natural-mapping",
+    title: "Natural mapping",
+    description: "Burner knobs laid out like the cooktop so each control maps to its effect.",
+    tags: ["norman", "mapping"],
+    category: "Principles",
+    updatedAt: "2026-09-09",
+    html: "/patterns/natural-mapping/index.html",
+    thumb: "/patterns/natural-mapping/thumb.svg",
+    isNew: true,
+    canon: {
+      label: "Mapping",
+      anchor: "mapping",
+    },
   },
 ];

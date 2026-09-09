@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import type { Pattern } from "@/content/patterns";
 import { CanonModal } from "./CanonModal";
 import { FilterChips } from "./FilterChips";
@@ -15,15 +15,34 @@ type Props = {
   canonMarkdown: string;
 };
 
+function subscribeCanonQuery(onChange: () => void) {
+  window.addEventListener("popstate", onChange);
+  return () => window.removeEventListener("popstate", onChange);
+}
+
+function getCanonQuery() {
+  return new URLSearchParams(window.location.search).get("canon");
+}
+
 export function Gallery({ patterns, canonMarkdown }: Props) {
   const [query, setQuery] = useState("");
   const [tag, setTag] = useState("All");
   const [sort, setSort] = useState<SortKey>("az");
   const [open, setOpen] = useState<Pattern | null>(null);
-  const [canonOpen, setCanonOpen] = useState(false);
+  const [canonManualOpen, setCanonManualOpen] = useState(false);
+  const [canonDismissed, setCanonDismissed] = useState(false);
   const [view, setView] = useState<ViewMode>("gallery");
   const close = useCallback(() => setOpen(null), []);
-  const closeCanon = useCallback(() => setCanonOpen(false), []);
+  const canonAnchor = useSyncExternalStore(subscribeCanonQuery, getCanonQuery, () => null);
+  const canonOpen = canonManualOpen || Boolean(canonAnchor && !canonDismissed);
+  const closeCanon = useCallback(() => {
+    setCanonManualOpen(false);
+    setCanonDismissed(true);
+  }, []);
+  const openCanon = useCallback(() => {
+    setCanonManualOpen(true);
+    setCanonDismissed(false);
+  }, []);
 
   const tags = useMemo(() => {
     return [...new Set(patterns.flatMap((p) => p.tags))].sort((a, b) =>
@@ -53,7 +72,7 @@ export function Gallery({ patterns, canonMarkdown }: Props) {
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-5 py-12">
       <button
         type="button"
-        onClick={() => setCanonOpen(true)}
+        onClick={openCanon}
         className="fixed top-4 right-4 z-40 rounded-[8px] border border-border bg-surface px-3 py-1.5 text-sm text-foreground shadow-card hover:bg-background"
       >
         Canon
@@ -80,7 +99,12 @@ export function Gallery({ patterns, canonMarkdown }: Props) {
 
       <PatternGrid patterns={visible} onOpen={setOpen} view={view} />
       <PreviewModal pattern={open} onClose={close} />
-      <CanonModal markdown={canonMarkdown} open={canonOpen} onClose={closeCanon} />
+      <CanonModal
+        markdown={canonMarkdown}
+        open={canonOpen}
+        onClose={closeCanon}
+        scrollTo={canonAnchor}
+      />
     </div>
   );
 }
