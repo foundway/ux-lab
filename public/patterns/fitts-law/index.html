@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fitts's law</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    .modes { display: flex; gap: 8px; margin-bottom: 12px; }
+    .modes .btn-ghost[aria-pressed="true"] {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+    .board {
+      position: relative;
+      height: 176px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--bg);
+    }
+    .start {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+    }
+    .target {
+      position: absolute;
+      padding: 0;
+    }
+    .board.near .target {
+      left: 12px;
+      bottom: 52px;
+      width: 128px;
+      height: 40px;
+    }
+    .board.far .target {
+      right: 10px;
+      top: 10px;
+      width: 44px;
+      height: 24px;
+      font-size: 0.68rem;
+      border-radius: 4px;
+    }
+    .footnote {
+      width: min(440px, 100%);
+      margin-top: 18px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .footnote a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Fitts's law</h1>
+    <p class="lead">Larger, closer controls are faster to hit — distance and size set how hard a target is to acquire.</p>
+    <div class="modes">
+      <button type="button" class="btn-ghost" id="near" aria-pressed="true">Nearby and large</button>
+      <button type="button" class="btn-ghost" id="far" aria-pressed="false">Tiny and far</button>
+    </div>
+    <div class="board near" id="board">
+      <button type="button" class="btn target" id="save" disabled>Save</button>
+      <button type="button" class="btn-ghost start" id="start">Start</button>
+    </div>
+    <p class="hint" id="status" role="status">Click Start, then Save. Try both layouts.</p>
+  </div>
+  <footer class="footnote">
+    Created 2026-09-10 · Canon:
+    <a href="../../?canon=fitts-s-law" target="_top">Fitts's law</a>
+  </footer>
+  <script>
+    const board = document.getElementById("board");
+    const start = document.getElementById("start");
+    const save = document.getElementById("save");
+    const status = document.getElementById("status");
+    const near = document.getElementById("near");
+    const far = document.getElementById("far");
+    let armed = 0;
+
+    function setMode(easy) {
+      board.classList.toggle("near", easy);
+      board.classList.toggle("far", !easy);
+      near.setAttribute("aria-pressed", String(easy));
+      far.setAttribute("aria-pressed", String(!easy));
+      save.disabled = true;
+      armed = 0;
+      status.textContent = easy
+        ? "Large Save sits next to Start — click Start, then Save."
+        : "Tiny Save is across the board — click Start, then Save.";
+    }
+
+    near.onclick = () => setMode(true);
+    far.onclick = () => setMode(false);
+    start.onclick = () => {
+      armed = performance.now();
+      save.disabled = false;
+      status.textContent = "Now click Save.";
+    };
+    save.onclick = () => {
+      if (!armed) return;
+      const ms = Math.round(performance.now() - armed);
+      const easy = board.classList.contains("near");
+      save.disabled = true;
+      armed = 0;
+      status.textContent = easy
+        ? "Hit in " + ms + " ms — large nearby targets are quicker to acquire."
+        : "Hit in " + ms + " ms — small distant targets take longer (Fitts, 1954).";
+    };
+  </script>
+</body>
+</html>

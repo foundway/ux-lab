@@ -198,10 +198,24 @@ export const patterns: Pattern[] = [
     updatedAt: "2026-09-09",
     html: "/patterns/affordances-signifiers/index.html",
     thumb: "/patterns/affordances-signifiers/thumb.svg",
-    isNew: true,
     canon: {
       label: "Affordances and signifiers",
       anchor: "affordances-and-signifiers",
+    },
+  },
+  {
+    slug: "fitts-law",
+    title: "Fitts's law",
+    description: "Hit a large nearby Save versus a tiny distant one to feel how size and distance affect pointing.",
+    tags: ["fitts", "pointing"],
+    category: "Principles",
+    updatedAt: "2026-09-10",
+    html: "/patterns/fitts-law/index.html",
+    thumb: "/patterns/fitts-law/thumb.svg",
+    isNew: true,
+    canon: {
+      label: "Fitts's law",
+      anchor: "fitts-s-law",
     },
   },
 ];
