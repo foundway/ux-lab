@@ -58,6 +58,15 @@ Jakob Nielsen’s inspection heuristics. Full definitions: [NN/g](https://www.nn
 
 — Jakob Nielsen (1994). “10 Usability Heuristics for User Interface Design.” Nielsen Norman Group. Originally Nielsen & Molich (1990), CHI ’90.
 
+<a id="fitts-s-law"></a>
+## Fitts's law
+
+Time to acquire a target rises with distance and falls with size. Frequent or primary actions should be large and close to where the pointer already is; rare or risky actions can stay smaller and farther away.
+
+Lab demo: [Fitts's law](/patterns/fitts-law/index.html).
+
+— Paul M. Fitts (1954). “The information capacity of the human motor system in controlling the amplitude of movement.” *Journal of Experimental Psychology*, 47(6), 381–391. [doi:10.1037/h0055392](https://doi.org/10.1037/h0055392).
+
 ## Patterns in this lab
 
 ### Gallery staples
@@ -93,8 +102,15 @@ Jakob Nielsen’s inspection heuristics. Full definitions: [NN/g](https://www.nn
 | [Natural mapping](/patterns/natural-mapping/index.html) | [#Mapping](#mapping) |
 | [Affordances and signifiers](/patterns/affordances-signifiers/index.html) | [#Affordances and signifiers](#affordances-and-signifiers) |
 
+### Pointing (dedicated demos)
+
+| Pattern | Exploring |
+| --- | --- |
+| [Fitts's law](/patterns/fitts-law/index.html) | [#Fitts's law](#fitts-s-law) |
+
 ## References
 
+- Fitts, P. M. (1954). [The information capacity of the human motor system in controlling the amplitude of movement](https://doi.org/10.1037/h0055392). *Journal of Experimental Psychology*, 47(6), 381–391.
 - Gibson, J. J. (1979). [*The Ecological Approach to Visual Perception*](https://www.routledge.com/The-Ecological-Approach-to-Visual-Perception-Classic-Edition/Gibson/p/book/9781848725782). Houghton Mifflin; Classic Edition, Psychology Press.
 - Nielsen, J. (1994). [10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/). Nielsen Norman Group.
 - Norman, D. A. (2013). [*The Design of Everyday Things* (revised)](https://mitpress.mit.edu/9780262525671/the-design-of-everyday-things/). MIT Press.
