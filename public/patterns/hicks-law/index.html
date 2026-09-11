@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hick's law</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    .modes { display: flex; gap: 8px; margin-bottom: 12px; }
+    .modes .btn-ghost[aria-pressed="true"] {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .choices button {
+      width: 100%;
+      padding: 8px 6px;
+      font-size: 0.82rem;
+    }
+    .task { margin: 0 0 10px; }
+    .start { margin-bottom: 12px; }
+    .status { margin-top: 12px; }
+    .footnote {
+      width: min(440px, 100%);
+      margin-top: 18px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .footnote a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Hick's law</h1>
+    <p class="lead">Fewer equally likely choices are faster to pick — decision time grows with the size of the set.</p>
+    <div class="modes">
+      <button type="button" class="btn-ghost" id="few" aria-pressed="true">3 choices</button>
+      <button type="button" class="btn-ghost" id="many" aria-pressed="false">12 choices</button>
+    </div>
+    <p class="hint task">Export this note — choose <strong>PDF</strong>.</p>
+    <button type="button" class="btn start" id="start">Start</button>
+    <div class="choices" id="choices"></div>
+    <p class="hint status" id="status" role="status">Click Start, then PDF. Try both list sizes.</p>
+  </div>
+  <footer class="footnote">
+    Created 2026-09-11 · Canon:
+    <a href="../../?canon=hick-s-law" target="_top">Hick's law</a>
+  </footer>
+  <script>
+    const fewOpts = ["Word", "PDF", "Image"];
+    const manyOpts = [
+      "Word", "PDF", "Image", "CSV", "HTML", "Markdown",
+      "JSON", "XML", "EPUB", "TXT", "RTF", "ZIP",
+    ];
+    const choices = document.getElementById("choices");
+    const start = document.getElementById("start");
+    const status = document.getElementById("status");
+    const few = document.getElementById("few");
+    const many = document.getElementById("many");
+    let armed = 0;
+    let compact = true;
+
+    function render() {
+      const opts = compact ? fewOpts : manyOpts;
+      choices.replaceChildren();
+      opts.forEach((label) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "btn-ghost";
+        btn.textContent = label;
+        btn.disabled = !armed;
+        btn.onclick = () => pick(label);
+        choices.appendChild(btn);
+      });
+    }
+
+    function setMode(isFew) {
+      compact = isFew;
+      few.setAttribute("aria-pressed", String(isFew));
+      many.setAttribute("aria-pressed", String(!isFew));
+      armed = 0;
+      start.disabled = false;
+      status.textContent = isFew
+        ? "Three formats — click Start, then PDF."
+        : "Twelve formats — click Start, then PDF.";
+      render();
+    }
+
+    function pick(label) {
+      if (!armed) return;
+      if (label !== "PDF") {
+        status.textContent = "That's " + label + " — pick PDF.";
+        return;
+      }
+      const ms = Math.round(performance.now() - armed);
+      armed = 0;
+      start.disabled = false;
+      render();
+      status.textContent = compact
+        ? "Chose PDF in " + ms + " ms — a short list is quicker to scan."
+        : "Chose PDF in " + ms + " ms — more options take longer (Hick, 1952).";
+    }
+
+    few.onclick = () => setMode(true);
+    many.onclick = () => setMode(false);
+    start.onclick = () => {
+      armed = performance.now();
+      start.disabled = true;
+      status.textContent = "Now choose PDF.";
+      render();
+    };
+
+    render();
+  </script>
+</body>
+</html>
