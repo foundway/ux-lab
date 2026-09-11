@@ -212,10 +212,24 @@ export const patterns: Pattern[] = [
     updatedAt: "2026-09-10",
     html: "/patterns/fitts-law/index.html",
     thumb: "/patterns/fitts-law/thumb.svg",
-    isNew: true,
     canon: {
       label: "Fitts's law",
       anchor: "fitts-s-law",
+    },
+  },
+  {
+    slug: "hicks-law",
+    title: "Hick's law",
+    description: "Pick PDF from three formats versus a long list to feel how extra options slow the choice.",
+    tags: ["hick", "choice"],
+    category: "Principles",
+    updatedAt: "2026-09-11",
+    html: "/patterns/hicks-law/index.html",
+    thumb: "/patterns/hicks-law/thumb.svg",
+    isNew: true,
+    canon: {
+      label: "Hick's law",
+      anchor: "hick-s-law",
     },
   },
 ];

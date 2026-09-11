@@ -67,6 +67,15 @@ Lab demo: [Fitts's law](/patterns/fitts-law/index.html).
 
 — Paul M. Fitts (1954). “The information capacity of the human motor system in controlling the amplitude of movement.” *Journal of Experimental Psychology*, 47(6), 381–391. [doi:10.1037/h0055392](https://doi.org/10.1037/h0055392).
 
+<a id="hick-s-law"></a>
+## Hick's law
+
+Time to choose among equally likely options rises with the number of choices (roughly with the log of *n*). Menus and pickers should keep the set small, or progressive, so the next action does not have to be hunted out of a long list.
+
+Lab demo: [Hick's law](/patterns/hicks-law/index.html).
+
+— W. E. Hick (1952). “On the rate of gain of information.” *Quarterly Journal of Experimental Psychology*, 4(1), 11–26. [doi:10.1080/17470215208416600](https://doi.org/10.1080/17470215208416600). Often called the Hick–Hyman law after Hyman, R. (1953). “Stimulus information as a determinant of reaction time.” *Journal of Experimental Psychology*, 45(3), 188–196. [doi:10.1037/h0056302](https://doi.org/10.1037/h0056302).
+
 ## Patterns in this lab
 
 ### Gallery staples
@@ -108,10 +117,18 @@ Lab demo: [Fitts's law](/patterns/fitts-law/index.html).
 | --- | --- |
 | [Fitts's law](/patterns/fitts-law/index.html) | [#Fitts's law](#fitts-s-law) |
 
+### Choice (dedicated demos)
+
+| Pattern | Exploring |
+| --- | --- |
+| [Hick's law](/patterns/hicks-law/index.html) | [#Hick's law](#hick-s-law) |
+
 ## References
 
 - Fitts, P. M. (1954). [The information capacity of the human motor system in controlling the amplitude of movement](https://doi.org/10.1037/h0055392). *Journal of Experimental Psychology*, 47(6), 381–391.
 - Gibson, J. J. (1979). [*The Ecological Approach to Visual Perception*](https://www.routledge.com/The-Ecological-Approach-to-Visual-Perception-Classic-Edition/Gibson/p/book/9781848725782). Houghton Mifflin; Classic Edition, Psychology Press.
+- Hick, W. E. (1952). [On the rate of gain of information](https://doi.org/10.1080/17470215208416600). *Quarterly Journal of Experimental Psychology*, 4(1), 11–26.
+- Hyman, R. (1953). [Stimulus information as a determinant of reaction time](https://doi.org/10.1037/h0056302). *Journal of Experimental Psychology*, 45(3), 188–196.
 - Nielsen, J. (1994). [10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/). Nielsen Norman Group.
 - Norman, D. A. (2013). [*The Design of Everyday Things* (revised)](https://mitpress.mit.edu/9780262525671/the-design-of-everyday-things/). MIT Press.
 - Rams, D. Ten Principles for Good Design. [Vitsœ](https://www.vitsoe.com/gb/about/good-design).
