@@ -1,28 +1,28 @@
 # Canon
 
-Working notes for UX Lab: core believe, principles, heuristics, and patterns. Human-reviewed.
+Working notes for UX Lab: core beliefs, principles, heuristics, and patterns. Human-reviewed.
 
 ## My design principles
 
-**Confidence to act**
+**Structure clarity**
 
-What’s shown is trustworthy; mistakes are easy to reverse. Users decide without hesitating.
-
-**Value density**
-
-Most useful outcome per space and time — signal, not clutter.
+Hierarchy and grouping make the flow obvious: what matters first and belongs together.
 
 **Progressive disclosure**
 
 Show complexity only when this context needs it.
 
+**Confidence to act**
+
+What’s shown is trustworthy; mistakes are easy to reverse. Users decide without hesitating.
+
 **Workflow compatibility**
 
 Existing tasks take equal or fewer steps than before.
 
-**Gestalt**
+**Value density**
 
-Grouping, hierarchy, and controls match how people see and expect to use the UI.
+Most useful outcome per space and time — signal, not clutter.
 
 ## Design principles
 
@@ -144,6 +144,11 @@ Lab demo: [Hick's law](/patterns/hicks-law/index.html).
 | Pattern | Exploring |
 | --- | --- |
 | [Hick's law](/patterns/hicks-law/index.html) | [#Hick's law](#hick-s-law) |
+
+## Upcoming Exploration
+
+- Patterns for filter/sort/search
+- Patterns for queue building (AND/OR)
 
 ## Similar Sites
 
