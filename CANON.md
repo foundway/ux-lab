@@ -8,9 +8,14 @@ Working notes for UX Lab: core beliefs, principles, heuristics, and patterns. Hu
 
 Grouping and hierarchy make the layout obvious: what belongs together, and what matters first.
 
+<a id="progressive-disclosure"></a>
 ### Progressive disclosure
 
-Show complexity only when this context needs it.
+Show complexity only when this context needs it. Defer advanced or rarely used controls so the frequent path stays easy to learn and less error-prone.
+
+The [Progressive disclosure](/patterns/progressive-disclosure/index.html) demo keeps invite fields simple until Advanced is opened.
+
+— Jakob Nielsen (2006). “Progressive Disclosure.” Nielsen Norman Group. [nngroup.com](https://www.nngroup.com/articles/progressive-disclosure/). Early empirical support: Carroll, J. M., & Carrithers, C. (1984). “Training wheels in a user interface.” *Communications of the ACM*, 27(8), 800–806. [doi:10.1145/358198.358218](https://doi.org/10.1145/358198.358218).
 
 ### Confidence to act
 
@@ -181,6 +186,12 @@ Time to choose among equally likely options rises with the number of choices (ro
 | --- | --- |
 | Hick's law | Hick's law |
 
+### Disclosure (dedicated demos)
+
+| Pattern | Exploring |
+| --- | --- |
+| [Progressive disclosure](/patterns/progressive-disclosure/index.html) | [Progressive disclosure](#progressive-disclosure) |
+
 ## Upcoming Exploration
 
 - Patterns for filter/sort/search
@@ -194,10 +205,12 @@ Time to choose among equally likely options rises with the number of choices (ro
 
 ## References
 
+- Carroll, J. M., & Carrithers, C. (1984). [Training wheels in a user interface](https://doi.org/10.1145/358198.358218). *Communications of the ACM*, 27(8), 800–806.
 - Fitts, P. M. (1954). [The information capacity of the human motor system in controlling the amplitude of movement](https://doi.org/10.1037/h0055392). *Journal of Experimental Psychology*, 47(6), 381–391.
 - Gibson, J. J. (1979). [*The Ecological Approach to Visual Perception*](https://www.routledge.com/The-Ecological-Approach-to-Visual-Perception-Classic-Edition/Gibson/p/book/9781848725782). Houghton Mifflin; Classic Edition, Psychology Press.
 - Hick, W. E. (1952). [On the rate of gain of information](https://doi.org/10.1080/17470215208416600). *Quarterly Journal of Experimental Psychology*, 4(1), 11–26.
 - Hyman, R. (1953). [Stimulus information as a determinant of reaction time](https://doi.org/10.1037/h0056302). *Journal of Experimental Psychology*, 45(3), 188–196.
 - Nielsen, J. (1994). [10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/). Nielsen Norman Group.
+- Nielsen, J. (2006). [Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/). Nielsen Norman Group.
 - Norman, D. A. (2013). [*The Design of Everyday Things* (revised)](https://mitpress.mit.edu/9780262525671/the-design-of-everyday-things/). MIT Press.
 - Rams, D. Ten Principles for Good Design. [Vitsœ](https://www.vitsoe.com/gb/about/good-design).
