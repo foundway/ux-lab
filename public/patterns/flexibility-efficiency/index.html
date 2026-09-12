@@ -17,14 +17,22 @@
   </style>
 </head>
 <body>
-  <div class="stage">
+  <div class="demo">
+    <div class="stage">
     <h1>Flexibility and efficiency</h1>
     <p class="lead">Nielsen #7 — novices click; experts use accelerators.</p>
     <div class="item"><span>Archive selection</span><span><button class="btn-ghost" data-act="Archive">Do it</button> <kbd>A</kbd></span></div>
     <div class="item"><span>Star thread</span><span><button class="btn-ghost" data-act="Star">Do it</button> <kbd>S</kbd></span></div>
     <div class="item"><span>Mute conversation</span><span><button class="btn-ghost" data-act="Mute">Do it</button> <kbd>M</kbd></span></div>
     <p class="hint" id="out">Click a button or press A / S / M.</p>
+</div>
   </div>
+
+  <footer class="footnote">
+  Created 2026-09-08 · Canon:
+  <a href="../../?canon=nielsen-7" target="_top">Nielsen #7 — Flexibility and efficiency of use</a>
+</footer>
+
   <script>
     const out = document.getElementById("out");
     const map = { a: "Archive", s: "Star", m: "Mute" };

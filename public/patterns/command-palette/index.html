@@ -44,18 +44,26 @@
   </style>
 </head>
 <body>
-  <div class="stage">
+  <div class="demo">
+    <div class="stage">
     <h1>Jump anywhere</h1>
     <p class="lead">Press <kbd>⌘</kbd><kbd>K</kbd> or click the button. Filter, then Enter.</p>
     <button class="btn" id="open">Open command palette</button>
     <p class="hint" id="chosen">No action yet</p>
-  </div>
+</div>
   <div id="overlay" role="dialog" aria-modal="true" aria-label="Command palette">
     <div class="palette">
       <input id="q" type="search" placeholder="Type a command…" autocomplete="off" />
       <div id="list"></div>
     </div>
   </div>
+  </div>
+
+  <footer class="footnote">
+  Created 2026-09-07 · Canon:
+  <a href="../../?canon=nielsen-7" target="_top">Nielsen #7 — Flexibility and efficiency of use</a>
+</footer>
+
   <script>
     const actions = ["New file", "Go to inbox", "Toggle sidebar", "Archive selection", "Open settings"];
     const overlay = document.getElementById("overlay");

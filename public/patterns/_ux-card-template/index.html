@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UX Card template</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <!--
+    Official UX Card shell for agents.
+    Copy this folder to public/patterns/{slug}/ and replace the interaction.
+    Do NOT add this template to content/patterns.ts (it is not a gallery entry).
+  -->
+  <style>
+    /* Card-specific rules only. Prefer classes from pattern.css. */
+  </style>
+</head>
+<body>
+  <!--
+    Layout contract (from pattern.css):
+    - body is a column flex; .demo grows and centers .stage
+    - .stage is the white UX Card
+    - .footnote stays outside .demo so it pins to the bottom of the page
+    Overlays (toasts, dialogs, palettes) go inside .demo, after .stage — not inside .stage.
+  -->
+  <div class="demo">
+    <div class="stage">
+      <h1>UX Card title</h1>
+      <p class="lead">One sentence: what the user can do and why it is a UX idea.</p>
+
+      <div class="field">
+        <label for="sample">Sample field</label>
+        <input id="sample" placeholder="Type something" />
+      </div>
+      <div class="row">
+        <button class="btn" type="button" id="primary">Primary action</button>
+        <button class="btn-ghost" type="button" id="secondary">Secondary</button>
+      </div>
+      <p class="hint" id="status" role="status">Status updates go here.</p>
+    </div>
+  </div>
+
+  <footer class="footnote">
+    Created YYYY-MM-DD · Canon:
+    <a href="../../?canon=nielsen-1" target="_top">Nielsen #1 — Visibility of system status</a>
+  </footer>
+
+  <script>
+    const status = document.getElementById("status");
+    document.getElementById("primary").onclick = () => {
+      status.textContent = "Primary action ran.";
+    };
+    document.getElementById("secondary").onclick = () => {
+      status.textContent = "Secondary action ran.";
+    };
+  </script>
+</body>
+</html>

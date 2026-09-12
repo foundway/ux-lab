@@ -42,29 +42,25 @@
       font-size: 0.68rem;
       border-radius: 4px;
     }
-    .footnote {
-      width: min(440px, 100%);
-      margin-top: 18px;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .footnote a { color: var(--accent); }
   </style>
 </head>
 <body>
-  <div class="stage">
-    <h1>Fitts's law</h1>
-    <p class="lead">Larger, closer controls are faster to hit — distance and size set how hard a target is to acquire.</p>
-    <div class="modes">
-      <button type="button" class="btn-ghost" id="near" aria-pressed="true">Nearby and large</button>
-      <button type="button" class="btn-ghost" id="far" aria-pressed="false">Tiny and far</button>
+  <div class="demo">
+    <div class="stage">
+      <h1>Fitts's law</h1>
+      <p class="lead">Larger, closer controls are faster to hit — distance and size set how hard a target is to acquire.</p>
+      <div class="modes">
+        <button type="button" class="btn-ghost" id="near" aria-pressed="true">Nearby and large</button>
+        <button type="button" class="btn-ghost" id="far" aria-pressed="false">Tiny and far</button>
+      </div>
+      <div class="board near" id="board">
+        <button type="button" class="btn target" id="save" disabled>Save</button>
+        <button type="button" class="btn-ghost start" id="start">Start</button>
+      </div>
+      <p class="hint" id="status" role="status">Click Start, then Save. Try both layouts.</p>
     </div>
-    <div class="board near" id="board">
-      <button type="button" class="btn target" id="save" disabled>Save</button>
-      <button type="button" class="btn-ghost start" id="start">Start</button>
-    </div>
-    <p class="hint" id="status" role="status">Click Start, then Save. Try both layouts.</p>
   </div>
+
   <footer class="footnote">
     Created 2026-09-10 · Canon:
     <a href="../../?canon=fitts-s-law" target="_top">Fitts's law</a>

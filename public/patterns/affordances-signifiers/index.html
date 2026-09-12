@@ -64,33 +64,29 @@
       outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
-    .footnote {
-      width: min(440px, 100%);
-      margin-top: 18px;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .footnote a { color: var(--accent); }
   </style>
 </head>
 <body>
-  <div class="stage">
-    <h1>Affordances and signifiers</h1>
-    <p class="lead">A handle invites pulling; a plate invites pushing — the hardware is the cue.</p>
-    <div class="hall">
-      <div class="frame pull" id="pull-door">
-        <div class="leaf">
-          <button type="button" class="handle" id="pull" aria-expanded="false" aria-label="Pull door"></button>
+  <div class="demo">
+    <div class="stage">
+      <h1>Affordances and signifiers</h1>
+      <p class="lead">A handle invites pulling; a plate invites pushing — the hardware is the cue.</p>
+      <div class="hall">
+        <div class="frame pull" id="pull-door">
+          <div class="leaf">
+            <button type="button" class="handle" id="pull" aria-expanded="false" aria-label="Pull door"></button>
+          </div>
+        </div>
+        <div class="frame push" id="push-door">
+          <div class="leaf">
+            <button type="button" class="plate" id="push" aria-expanded="false" aria-label="Push door"></button>
+          </div>
         </div>
       </div>
-      <div class="frame push" id="push-door">
-        <div class="leaf">
-          <button type="button" class="plate" id="push" aria-expanded="false" aria-label="Push door"></button>
-        </div>
-      </div>
+      <p class="hint" id="status" role="status">Try each door — the hardware tells you how it opens.</p>
     </div>
-    <p class="hint" id="status" role="status">Try each door — the hardware tells you how it opens.</p>
   </div>
+
   <footer class="footnote">
     Created 2026-09-09 · Canon:
     <a href="../../?canon=affordances-and-signifiers" target="_top">Affordances and signifiers</a>

@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="../pattern.css" />
 </head>
 <body>
-  <div class="stage">
+  <div class="demo">
+    <div class="stage">
     <h1>Create account</h1>
     <p class="lead">Errors appear after a field is touched, not on first paint.</p>
     <form id="form" novalidate>
@@ -25,7 +26,14 @@
       <button class="btn" type="submit">Continue</button>
       <p class="hint" id="done" hidden>Looks good — form would submit here.</p>
     </form>
+</div>
   </div>
+
+  <footer class="footnote">
+  Created 2026-09-06 · Canon:
+  <a href="../../?canon=nielsen-9" target="_top">Nielsen #9 — Help users recognize, diagnose, and recover from errors</a>
+</footer>
+
   <script>
     const email = document.getElementById("email");
     const pw = document.getElementById("pw");

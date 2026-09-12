@@ -25,28 +25,24 @@
     .task { margin: 0 0 10px; }
     .start { margin-bottom: 12px; }
     .status { margin-top: 12px; }
-    .footnote {
-      width: min(440px, 100%);
-      margin-top: 18px;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .footnote a { color: var(--accent); }
   </style>
 </head>
 <body>
-  <div class="stage">
-    <h1>Hick's law</h1>
-    <p class="lead">Fewer equally likely choices are faster to pick — decision time grows with the size of the set.</p>
-    <div class="modes">
-      <button type="button" class="btn-ghost" id="few" aria-pressed="true">3 choices</button>
-      <button type="button" class="btn-ghost" id="many" aria-pressed="false">12 choices</button>
+  <div class="demo">
+    <div class="stage">
+      <h1>Hick's law</h1>
+      <p class="lead">Fewer equally likely choices are faster to pick — decision time grows with the size of the set.</p>
+      <div class="modes">
+        <button type="button" class="btn-ghost" id="few" aria-pressed="true">3 choices</button>
+        <button type="button" class="btn-ghost" id="many" aria-pressed="false">12 choices</button>
+      </div>
+      <p class="hint task">Export this note — choose <strong>PDF</strong>.</p>
+      <button type="button" class="btn start" id="start">Start</button>
+      <div class="choices" id="choices"></div>
+      <p class="hint status" id="status" role="status">Click Start, then PDF. Try both list sizes.</p>
     </div>
-    <p class="hint task">Export this note — choose <strong>PDF</strong>.</p>
-    <button type="button" class="btn start" id="start">Start</button>
-    <div class="choices" id="choices"></div>
-    <p class="hint status" id="status" role="status">Click Start, then PDF. Try both list sizes.</p>
   </div>
+
   <footer class="footnote">
     Created 2026-09-11 · Canon:
     <a href="../../?canon=hick-s-law" target="_top">Hick's law</a>

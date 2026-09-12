@@ -27,7 +27,7 @@ function getCanonQuery() {
 export function Gallery({ patterns, canonMarkdown }: Props) {
   const [query, setQuery] = useState("");
   const [tag, setTag] = useState("All");
-  const [sort, setSort] = useState<SortKey>("az");
+  const [sort, setSort] = useState<SortKey>("newest");
   const [open, setOpen] = useState<Pattern | null>(null);
   const [canonManualOpen, setCanonManualOpen] = useState(false);
   const [canonDismissed, setCanonDismissed] = useState(false);
@@ -59,7 +59,13 @@ export function Gallery({ patterns, canonMarkdown }: Props) {
     });
 
     return filtered.sort((a, b) => {
-      if (sort === "newest") return b.updatedAt.localeCompare(a.updatedAt, "en");
+      if (sort === "newest") {
+        const byDate = b.createdAt.localeCompare(a.createdAt, "en");
+        if (byDate) return byDate;
+        const byNew = Number(!!b.isNew) - Number(!!a.isNew);
+        if (byNew) return byNew;
+        return a.title.localeCompare(b.title, "en");
+      }
       if (sort === "category") {
         const byCat = a.category.localeCompare(b.category, "en");
         return byCat || a.title.localeCompare(b.title, "en");
