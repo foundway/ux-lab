@@ -1,6 +1,18 @@
 # Canon
 
-Working notes for UX Lab: principles, heuristics, and patterns. Entries are AI-generated and human-reviewed.
+Working notes for UX Lab: core believe, principles, heuristics, and patterns. Human-reviewed.
+
+## My Design Principles
+
+**Confidence to act**
+
+**Value density**
+
+**Progressive Disclosure**
+
+**Workflow Compatiblity**
+
+**Gestalt**
 
 ## Design principles
 
@@ -122,6 +134,12 @@ Lab demo: [Hick's law](/patterns/hicks-law/index.html).
 | Pattern | Exploring |
 | --- | --- |
 | [Hick's law](/patterns/hicks-law/index.html) | [#Hick's law](#hick-s-law) |
+
+## Similar Sites
+
+- https://ui-patterns.com/patterns
+- https://codemyui.com/
+- https://uiverse.io/
 
 ## References
 
