@@ -66,10 +66,13 @@ Catalog fields:
   updatedAt: "YYYY-MM-DD", // usually same as createdAt for new entries
   html: "/patterns/{slug}/index.html",
   thumb: "/patterns/{slug}/thumb.svg",
-  canon: {
-    label: "Nielsen #1 — Visibility of system status", // shown in the HTML footnote
-    anchor: "nielsen-1", // id in CANON.md; opens via /?canon=nielsen-1
-  },
+  canon: [
+    {
+      label: "Nielsen #1 — Visibility of system status", // shown in the HTML footnote/chip
+      anchor: "nielsen-1", // id in CANON.md; opens via /?canon=nielsen-1
+      note: "The progress state responds immediately so users know the upload is moving.", // why this card illustrates the entry
+    },
+  ],
   isNew: true, // see NEW chip rules below
 }
 ```
@@ -109,7 +112,7 @@ Every gallery card must match the template:
 </body>
 ```
 
-- Use the same `createdAt`, `canon.label`, and `canon.anchor` as the catalog row.
+- Use the same `createdAt`, `canon[0].label`, and `canon[0].anchor` as the primary catalog row entry; add additional Canon links after it when the card maps to multiple entries.
 - `../../?canon=…` + `target="_top"` breaks out of the preview iframe and opens Canon scrolled to that section.
 - Prefer existing Canon anchors (`nielsen-1` … `nielsen-10`, or anchors in `CANON.md`). If you introduce a new Canon idea, add a matching anchor/section in `CANON.md` first.
 - Footnote styles live in `pattern.css` (`.footnote`); body flex + `.demo` keep the card centered and the footnote at the bottom.

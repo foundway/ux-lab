@@ -11,7 +11,7 @@ type Props = {
 };
 
 export function PreviewModal({ pattern, onClose }: Props) {
-  const [downloading, setDownloading] = useState(false);
+  const [downloadingSlug, setDownloadingSlug] = useState<string | null>(null);
 
   useEffect(() => {
     if (!pattern) return;
@@ -27,23 +27,20 @@ export function PreviewModal({ pattern, onClose }: Props) {
     };
   }, [pattern, onClose]);
 
-  useEffect(() => {
-    setDownloading(false);
-  }, [pattern]);
-
   if (!pattern) return null;
 
   const htmlHref = withBasePath(pattern.html);
+  const downloading = downloadingSlug === pattern.slug;
 
   async function onDownload() {
     if (!pattern || downloading) return;
-    setDownloading(true);
+    setDownloadingSlug(pattern.slug);
     try {
       await downloadPatternHtml(pattern.slug, pattern.html);
     } catch {
       // keep UI simple; failure is rare on static host
     } finally {
-      setDownloading(false);
+      setDownloadingSlug(null);
     }
   }
 

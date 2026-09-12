@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
-import type { Pattern } from "@/content/patterns";
+import { patternsByCanonAnchor, type Pattern } from "@/content/patterns";
 import { CanonModal } from "./CanonModal";
 import { FilterChips } from "./FilterChips";
 import { PatternGrid } from "./PatternGrid";
@@ -43,6 +43,13 @@ export function Gallery({ patterns, canonMarkdown }: Props) {
     setCanonManualOpen(true);
     setCanonDismissed(false);
   }, []);
+  const openPatternFromCanon = useCallback(
+    (pattern: Pattern) => {
+      closeCanon();
+      setOpen(pattern);
+    },
+    [closeCanon],
+  );
 
   const tags = useMemo(() => {
     return [...new Set(patterns.flatMap((p) => p.tags))].sort((a, b) =>
@@ -54,7 +61,10 @@ export function Gallery({ patterns, canonMarkdown }: Props) {
     const q = query.trim().toLowerCase();
     const filtered = patterns.filter((p) => {
       const matchesTag = tag === "All" || p.tags.includes(tag);
-      const hay = `${p.title} ${p.description} ${p.tags.join(" ")}`.toLowerCase();
+      const canonText = p.canon
+        .map((entry) => `${entry.label} ${entry.note}`)
+        .join(" ");
+      const hay = `${p.title} ${p.description} ${p.tags.join(" ")} ${canonText}`.toLowerCase();
       return matchesTag && (!q || hay.includes(q));
     });
 
@@ -109,6 +119,8 @@ export function Gallery({ patterns, canonMarkdown }: Props) {
         markdown={canonMarkdown}
         open={canonOpen}
         onClose={closeCanon}
+        onOpenPattern={openPatternFromCanon}
+        relatedByCanonAnchor={patternsByCanonAnchor}
         scrollTo={canonAnchor}
       />
     </div>

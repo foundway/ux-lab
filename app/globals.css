@@ -116,4 +116,72 @@ textarea {
   font-weight: 600;
 }
 
+.canon-doc .related-cards {
+  margin: 0.35rem 0 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--background);
+  overflow: hidden;
+}
+
+.canon-doc .related-cards-title {
+  border-bottom: 1px solid var(--border);
+  padding: 0.45rem 0.65rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.canon-doc .related-cards-list {
+  display: grid;
+}
+
+.canon-doc .related-card {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0.65rem;
+  align-items: center;
+  border: 0;
+  border-top: 1px solid var(--border);
+  background: transparent;
+  padding: 0.65rem;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+.canon-doc .related-card:first-child {
+  border-top: 0;
+}
+
+.canon-doc .related-card:hover {
+  background: var(--surface);
+}
+
+.canon-doc .related-card img {
+  width: 56px;
+  height: 35px;
+  border-radius: 6px;
+  background: var(--surface);
+  object-fit: cover;
+}
+
+.canon-doc .related-card strong,
+.canon-doc .related-card span span {
+  display: block;
+}
+
+.canon-doc .related-card strong {
+  margin-bottom: 0.1rem;
+  font-size: 0.86rem;
+}
+
+.canon-doc .related-card span span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
 
