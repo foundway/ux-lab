@@ -2,17 +2,27 @@
 
 Working notes for UX Lab: core believe, principles, heuristics, and patterns. Human-reviewed.
 
-## My Design Principles
+## My design principles
 
 **Confidence to act**
 
+What’s shown is trustworthy; mistakes are easy to reverse. Users decide without hesitating.
+
 **Value density**
 
-**Progressive Disclosure**
+Most useful outcome per space and time — signal, not clutter.
 
-**Workflow Compatiblity**
+**Progressive disclosure**
+
+Show complexity only when this context needs it.
+
+**Workflow compatibility**
+
+Existing tasks take equal or fewer steps than before.
 
 **Gestalt**
+
+Grouping, hierarchy, and controls match how people see and expect to use the UI.
 
 ## Design principles
 
