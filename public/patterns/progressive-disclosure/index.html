@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Progressive disclosure</title>
+  <link rel="stylesheet" href="../pattern.css" />
+  <style>
+    select {
+      font: inherit;
+      width: 100%;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    #toggle {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 4px 0 12px;
+    }
+    .chev { font-size: 0.75rem; color: var(--muted); }
+    #advanced {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 16px;
+      background: #fafaf7;
+    }
+    #advanced[hidden] { display: none; }
+    #advanced .field:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <div class="demo">
+    <div class="stage">
+      <h1>Progressive disclosure</h1>
+      <p class="lead">Rare options stay hidden until you ask — the usual path stays simple.</p>
+
+      <div class="field">
+        <label for="email">Invite by email</label>
+        <input id="email" type="email" placeholder="guest@example.com" />
+      </div>
+
+      <button type="button" class="btn-ghost" id="toggle" aria-expanded="false" aria-controls="advanced">
+        Advanced options <span class="chev" aria-hidden="true">▾</span>
+      </button>
+
+      <div id="advanced" hidden>
+        <div class="field">
+          <label for="expires">Link expires</label>
+          <select id="expires">
+            <option value="7">7 days</option>
+            <option value="30">30 days</option>
+            <option value="never">Never</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="password">Access password</label>
+          <input id="password" type="text" placeholder="Optional" />
+        </div>
+      </div>
+
+      <button type="button" class="btn" id="send">Send invite</button>
+      <p class="hint" id="status" role="status">Email is enough — open Advanced only if you need limits.</p>
+    </div>
+  </div>
+
+  <footer class="footnote">
+    Created 2026-09-12 · Canon:
+    <a href="../../?canon=progressive-disclosure" target="_top">Progressive disclosure</a> ·
+    <a href="../../?canon=value-density" target="_top">Value density</a>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById("toggle");
+    const advanced = document.getElementById("advanced");
+    const status = document.getElementById("status");
+    const email = document.getElementById("email");
+    const expires = document.getElementById("expires");
+    const password = document.getElementById("password");
+
+    function setOpen(open) {
+      advanced.hidden = !open;
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.querySelector(".chev").textContent = open ? "▴" : "▾";
+    }
+
+    toggle.onclick = () => {
+      const open = advanced.hidden;
+      setOpen(open);
+      status.textContent = open
+        ? "Expiry and password are available — still optional."
+        : "Advanced options hidden again.";
+    };
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !advanced.hidden) {
+        setOpen(false);
+        toggle.focus();
+        status.textContent = "Advanced options hidden again.";
+      }
+    });
+
+    document.getElementById("send").onclick = () => {
+      const to = email.value.trim() || "guest@example.com";
+      if (advanced.hidden) {
+        status.textContent = "Invite sent to " + to + " with default settings.";
+        return;
+      }
+      const when = expires.value === "never" ? "no expiry" : "expires in " + expires.value + " days";
+      const lock = password.value.trim() ? " and a password" : "";
+      status.textContent = "Invite sent to " + to + " — " + when + lock + ".";
+    };
+  </script>
+</body>
+</html>

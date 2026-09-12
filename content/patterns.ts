@@ -597,6 +597,29 @@ export const patterns: Pattern[] = [
         note: "A smaller visible set makes each option earn attention.",
       },
     ],
+  },
+  {
+    slug: "progressive-disclosure",
+    title: "Progressive disclosure",
+    description: "Keep the usual invite path simple and reveal expiry and password only when Advanced is opened.",
+    tags: ["disclosure", "forms", "complexity"],
+    category: "Forms",
+    createdAt: "2026-09-12",
+    updatedAt: "2026-09-12",
+    html: "/patterns/progressive-disclosure/index.html",
+    thumb: "/patterns/progressive-disclosure/thumb.svg",
+    canon: [
+      {
+        anchor: "progressive-disclosure",
+        label: "Progressive disclosure",
+        note: "Advanced share options stay hidden until requested, so the usual invite path stays simple.",
+      },
+      {
+        anchor: "value-density",
+        label: "Value density",
+        note: "Rare controls do not occupy the first screen, so the frequent action stays easy to find.",
+      },
+    ],
     isNew: true,
   },
 ];
