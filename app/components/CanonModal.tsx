@@ -4,12 +4,15 @@ import { useEffect, useRef, type ReactNode } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import type { Pattern } from "@/content/patterns";
 import { withBasePath } from "@/lib/basePath";
 
 type Props = {
   markdown: string;
   open: boolean;
   onClose: () => void;
+  onOpenPattern: (pattern: Pattern) => void;
+  relatedByCanonAnchor: Map<string, Pattern[]>;
   scrollTo?: string | null;
 };
 
@@ -30,8 +33,65 @@ function headingId(children: ReactNode): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
-export function CanonModal({ markdown, open, onClose, scrollTo }: Props) {
+function RelatedCards({
+  anchor,
+  patterns,
+  onOpenPattern,
+}: {
+  anchor: string;
+  patterns: Pattern[];
+  onOpenPattern: (pattern: Pattern) => void;
+}) {
+  if (patterns.length === 0) return null;
+
+  return (
+    <div className="related-cards" aria-label="Related cards">
+      <div className="related-cards-title">Related cards</div>
+      <div className="related-cards-list">
+        {patterns.map((pattern) => {
+          const canon = pattern.canon.find((entry) => entry.anchor === anchor);
+          return (
+            <button
+              key={pattern.slug}
+              type="button"
+              className="related-card"
+              onClick={() => onOpenPattern(pattern)}
+            >
+              <img src={withBasePath(pattern.thumb)} alt="" />
+              <span>
+                <strong>{pattern.title}</strong>
+                <span>{canon?.note}</span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export function CanonModal({
+  markdown,
+  open,
+  onClose,
+  onOpenPattern,
+  relatedByCanonAnchor,
+  scrollTo,
+}: Props) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+
+  function renderHeading(level: 2 | 3, children: ReactNode, id?: string) {
+    const anchor = id || headingId(children);
+    const related = relatedByCanonAnchor.get(anchor) ?? [];
+    const Heading = level === 2 ? "h2" : "h3";
+
+    return (
+      <>
+        <Heading id={anchor}>{children}</Heading>
+        <RelatedCards anchor={anchor} patterns={related} onOpenPattern={onOpenPattern} />
+      </>
+    );
+  }
 
   useEffect(() => {
     if (!open) return;
@@ -89,8 +149,8 @@ export function CanonModal({ markdown, open, onClose, scrollTo }: Props) {
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
             components={{
-              h2: ({ children }) => <h2 id={headingId(children)}>{children}</h2>,
-              h3: ({ children }) => <h3 id={headingId(children)}>{children}</h3>,
+              h2: ({ children, id }) => renderHeading(2, children, id),
+              h3: ({ children, id }) => renderHeading(3, children, id),
               a: ({ href, children, id, ...props }) => {
                 if (id && !href) {
                   return <a id={id} {...props} />;
