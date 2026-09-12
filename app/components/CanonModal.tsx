@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import { withBasePath } from "@/lib/basePath";
 
 type Props = {
@@ -30,6 +31,8 @@ function headingId(children: ReactNode): string {
 }
 
 export function CanonModal({ markdown, open, onClose, scrollTo }: Props) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -45,9 +48,12 @@ export function CanonModal({ markdown, open, onClose, scrollTo }: Props) {
   }, [open, onClose]);
 
   useEffect(() => {
-    if (!open || !scrollTo) return;
+    if (!open || !scrollTo || !scrollerRef.current) return;
+    const root = scrollerRef.current;
     const timer = window.setTimeout(() => {
-      document.getElementById(scrollTo)?.scrollIntoView({ block: "start" });
+      root.querySelector(`#${CSS.escape(scrollTo)}`)?.scrollIntoView({
+        block: "start",
+      });
     }, 50);
     return () => window.clearTimeout(timer);
   }, [open, scrollTo, markdown]);
@@ -78,21 +84,44 @@ export function CanonModal({ markdown, open, onClose, scrollTo }: Props) {
             Close
           </button>
         </div>
-        <div className="canon-doc min-h-0 flex-1 overflow-y-auto px-5 py-6">
+        <div ref={scrollerRef} className="canon-doc min-h-0 flex-1 overflow-y-auto px-5 py-6">
           <Markdown
             remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
             components={{
               h2: ({ children }) => <h2 id={headingId(children)}>{children}</h2>,
               h3: ({ children }) => <h3 id={headingId(children)}>{children}</h3>,
-              a: ({ href, children }) => {
+              a: ({ href, children, id, ...props }) => {
+                if (id && !href) {
+                  return <a id={id} {...props} />;
+                }
                 const isExternal = href?.startsWith("http");
+                const isHash = href?.startsWith("#");
                 const resolved =
                   href && href.startsWith("/") ? withBasePath(href) : href;
+                if (isHash && href) {
+                  return (
+                    <a
+                      href={href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const target = href.slice(1);
+                        scrollerRef.current
+                          ?.querySelector(`#${CSS.escape(target)}`)
+                          ?.scrollIntoView({ block: "start", behavior: "smooth" });
+                      }}
+                      {...props}
+                    >
+                      {children}
+                    </a>
+                  );
+                }
                 return (
                   <a
                     href={resolved}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
+                    {...props}
                   >
                     {children}
                   </a>

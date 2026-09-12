@@ -21,9 +21,18 @@ html, body {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 32px 20px 0;
+}
+
+.demo {
+  flex: 1;
   display: grid;
   place-items: center;
-  padding: 32px 20px;
+  width: 100%;
+  padding-bottom: 32px;
 }
 
 .stage {
@@ -117,3 +126,22 @@ input:focus {
 .error { font-size: 0.8rem; color: var(--danger); margin-top: 6px; }
 .field { margin-bottom: 16px; }
 .row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.footnote {
+  flex-shrink: 0;
+  width: 100%;
+  margin: 0;
+  padding: 12px 0 16px;
+  border-top: 1px solid var(--line);
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.45;
+  text-align: center;
+}
+
+.footnote a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+

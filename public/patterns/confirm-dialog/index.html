@@ -27,11 +27,12 @@
   </style>
 </head>
 <body>
-  <div class="stage">
+  <div class="demo">
+    <div class="stage">
     <h1>Workspace</h1>
     <p class="lead" id="status">“Q3 archive” is still in this workspace.</p>
     <button class="btn-danger" id="delete">Delete project</button>
-  </div>
+</div>
   <div id="overlay" role="dialog" aria-modal="true" aria-labelledby="dtitle">
     <div class="dialog">
       <h2 id="dtitle">Delete this project?</h2>
@@ -42,6 +43,13 @@
       </div>
     </div>
   </div>
+  </div>
+
+  <footer class="footnote">
+  Created 2026-09-03 · Canon:
+  <a href="../../?canon=nielsen-5" target="_top">Nielsen #5 — Error prevention</a>
+</footer>
+
   <script>
     const overlay = document.getElementById("overlay");
     const status = document.getElementById("status");

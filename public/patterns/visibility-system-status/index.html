@@ -13,13 +13,21 @@
   </style>
 </head>
 <body>
-  <div class="stage">
+  <div class="demo">
+    <div class="stage">
     <h1>Visibility of system status</h1>
     <p class="lead">Nielsen #1 — keep users informed about what is going on, in time.</p>
     <button class="btn" id="upload">Upload report.pdf</button>
     <div class="bar" aria-hidden="true"><div class="fill" id="fill"></div></div>
     <p id="status" role="status">Ready</p>
+</div>
   </div>
+
+  <footer class="footnote">
+  Created 2026-09-08 · Canon:
+  <a href="../../?canon=nielsen-1" target="_top">Nielsen #1 — Visibility of system status</a>
+</footer>
+
   <script>
     const fill = document.getElementById("fill");
     const status = document.getElementById("status");

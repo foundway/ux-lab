@@ -9,7 +9,7 @@
     #toast {
       position: fixed;
       left: 50%;
-      bottom: 28px;
+      bottom: 52px;
       transform: translateX(-50%) translateY(16px);
       display: none;
       align-items: center;
@@ -37,16 +37,24 @@
   </style>
 </head>
 <body>
-  <div class="stage">
+  <div class="demo">
+    <div class="stage">
     <h1>Archive item</h1>
     <p class="lead">Confirming an action with a toast that can still be undone.</p>
     <p id="status" class="hint">3 notes in inbox</p>
     <button class="btn" id="archive">Archive “Kickoff notes”</button>
-  </div>
+</div>
   <div id="toast" role="status">
     <span>Archived Kickoff notes</span>
     <button type="button" id="undo">Undo</button>
   </div>
+  </div>
+
+  <footer class="footnote">
+  Created 2026-09-08 · Canon:
+  <a href="../../?canon=nielsen-3" target="_top">Nielsen #3 — User control and freedom</a>
+</footer>
+
   <script>
     const status = document.getElementById("status");
     const toast = document.getElementById("toast");
